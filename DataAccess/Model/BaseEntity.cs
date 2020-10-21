@@ -4,9 +4,8 @@ using System.Text;
 
 namespace DataAccess.Model
 {
-    public enum LinkType
+    public class BaseEntity<TId>
     {
-        Media=1,
-        Reference=2
+        public TId Id { get; set; }
     }
 }

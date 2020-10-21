@@ -4,9 +4,8 @@ using System.Text;
 
 namespace DataAccess.Model
 {
-    class CoursePart
+    public class CoursePart : BaseEntity<int>
     {
-        public int Id { get; set; }
         public int CourseId { get; set; }
         public string Title { get; set; }
         public int Order { get; set; }

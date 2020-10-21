@@ -4,10 +4,9 @@ using System.Text;
 
 namespace DataAccess.Model
 {
-    class Category
+    public class Category : BaseEntity<int>
     {
-        public int Id { get; set; }
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
         public string Name { get; set; }
         public Category Parent{ get; set; }
         public ICollection<Category> Children { get; set; }
