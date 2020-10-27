@@ -34,16 +34,44 @@ namespace EducationSystem.Mapper
             };
         }
 
-        public static List<CategoryDto> CategoriesToCategoryDtos(this List<Category> Categories)
+        public static List<CategoryDto> CategoriesToCategoryDtos(this List<Category> categories)
         {
-            if (Categories == null)
+            if (categories == null)
             {
-                throw new ArgumentNullException(nameof(Categories));
+                throw new ArgumentNullException(nameof(categories));
             }
             var CategoryDtos = new List<CategoryDto>();
-            for (int i = 0; i < Categories.Count; i++)
+            for (int i = 0; i < categories.Count; i++)
             {
-                CategoryDtos.Add(Categories[i].CategoryToCategoryDtoForGet());
+                CategoryDtos.Add(categories[i].CategoryToCategoryDtoForGet());
+            }
+
+            return CategoryDtos;
+        }
+
+        public static CategoryWithCategoryDto CategoryToCategoryWithCategoryDto(this Category category)
+        {
+            return new CategoryWithCategoryDto
+            {
+                Id = category.Id,
+                ParentId = category.ParentId,
+                Name = category.Name,
+                Courses = category.Courses != null ? category.Courses.Select(x => new CourseDto() { Id = x.Id, Name = x.Name }).ToList() : null,
+                Children = category.Children != null ? category.Children.Select(x => new CategoryWithCategoryDto { Id = x.Id, Name = x.Name }).ToList() : null,
+            };
+        }
+
+        public static List<CategoryWithCategoryDto> CategoriesToCategoriesWithCategoryDto(this List<Category> categories)
+        {
+            if (categories == null)
+            {
+                throw new ArgumentNullException(nameof(categories));
+            }
+
+            var CategoryDtos = new List<CategoryWithCategoryDto>();
+            for (int i = 0; i < categories.Count; i++)
+            {
+                CategoryDtos.Add(categories[i].CategoryToCategoryWithCategoryDto());
             }
 
             return CategoryDtos;

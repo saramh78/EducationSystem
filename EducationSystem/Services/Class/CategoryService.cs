@@ -36,5 +36,17 @@ namespace EducationSystem.Services.Class
             }
             return category.CategoryToCategoryDetailDto();
         }
+
+
+        public async Task<CategoryWithCategoryDto> GetWithChildrenAsync(int categoryId)
+        {
+            var categories = await _categoryRepository.FindWithChildrenAsync(categoryId);
+            if (categories == null)
+            {
+                throw new Exception("category Not Found");
+            }
+            // return categories.CategoryToCategoryWithCategoryDto();
+            return null;
+        }
     }
 }

@@ -33,7 +33,7 @@ namespace EducationSystem
         {
             services.AddControllers();
 
-           var connectionString = Configuration.GetConnectionString("EducationSystemConnectionStringSherkat");
+           var connectionString = Configuration.GetConnectionString("EducationSystemConnectionStringSara");
 
            services.AddDbContext<EducationSystemContext>(options => options.UseSqlServer(connectionString));
 

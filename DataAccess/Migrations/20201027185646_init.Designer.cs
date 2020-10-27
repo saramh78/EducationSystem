@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(EducationSystemContext))]
-    [Migration("20201021124044_init")]
+    [Migration("20201027185646_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,23 +36,6 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Articles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Text = "C# syntax is highly expressive, yet it's also simple and easy to learn. The curly brace syntax of C# will be instantly recognizable to anyone familiar with C, C++, Java or JavaScript. Developers who know any of these languages are typically able to work productively in C# within a short time. C# provides powerful features such as nullable types, delegates, lambda expressions, pattern matching, and safe direct memory access. C# supports generic methods and types, which provide increased type safety and performance. C# provides iterators, which enable implementers of collection classes to define custom behaviors for client code. Language-Integrated Query (LINQ) expressions make the strongly typed query a first-class language construct."
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Text = "C# is a strongly typed language. Every variable and constant has a type, as does every expression that evaluates to a value. Every method signature specifies a type for each input parameter and for the return value. The .NET class library defines a set of built-in numeric types as well as more complex types that represent a wide variety of logical constructs, such as the file system, network connections, collections and arrays of objects, and dates. A typical C# program uses types from the class library as well as user-defined types that model the concepts that are specific to the program's problem domain."
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Text = "A type that is defined as a class is a reference type. hen the object is created, enough memory is allocated on the managed heap for that specific object, and the variable holds only a reference to the location of said object. Types on the managed heap require overhead both when they are allocated and when they are reclaimed by the automatic memory management functionality of the CLR, which is known as garbage collection. However, garbage collection is also highly optimized and in most scenarios, it does not create a performance issue."
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.Category", b =>
@@ -102,21 +85,75 @@ namespace DataAccess.Migrations
                         },
                         new
                         {
+                            Id = 8,
+                            Name = "Bootstrap",
+                            ParentId = 6
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Css",
+                            ParentId = 6
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Html",
+                            ParentId = 6
+                        },
+                        new
+                        {
                             Id = 7,
                             Name = "Application",
                             ParentId = 2
                         },
                         new
                         {
+                            Id = 11,
+                            Name = "C",
+                            ParentId = 7
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "C#",
+                            ParentId = 11
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "C++",
+                            ParentId = 11
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "VB",
+                            ParentId = 7
+                        },
+                        new
+                        {
                             Id = 3,
                             Name = "DataBase",
+                            ParentId = 1
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "SQL Server",
+                            ParentId = 3
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Oracle",
                             ParentId = 3
                         },
                         new
                         {
                             Id = 4,
                             Name = "Network",
-                            ParentId = 4
+                            ParentId = 1
                         });
                 });
 
@@ -149,26 +186,56 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CategoryId = 7,
-                            Name = "C#"
+                            CategoryId = 2,
+                            Name = "How to start"
                         },
                         new
                         {
                             Id = 2,
-                            CategoryId = 7,
-                            Name = "Android"
+                            CategoryId = 2,
+                            Name = "essential information"
                         },
                         new
                         {
                             Id = 3,
-                            CategoryId = 7,
-                            Name = "Flutter"
+                            CategoryId = 2,
+                            Name = "Steps"
                         },
                         new
                         {
                             Id = 4,
+                            CategoryId = 5,
+                            Name = "Object Orianting"
+                        },
+                        new
+                        {
+                            Id = 5,
                             CategoryId = 6,
-                            Name = "c++"
+                            Name = "Languages"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 7,
+                            Name = "Languages"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 11,
+                            Name = "C Learning"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 13,
+                            Name = "C# Learning"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryId = 14,
+                            Name = "C++ Learning"
                         });
                 });
 
@@ -195,29 +262,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("CourseId");
 
                     b.ToTable("CourseParts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CourseId = 1,
-                            Order = 1,
-                            Title = "Get Started"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CourseId = 1,
-                            Order = 2,
-                            Title = "Types"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CourseId = 1,
-                            Order = 0,
-                            Title = "Classes"
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.CoursePartArticle", b =>
@@ -243,29 +287,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("CoursePartId");
 
                     b.ToTable("CoursePartArticles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ArticleId = 1,
-                            CoursePartId = 1,
-                            Order = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ArticleId = 2,
-                            CoursePartId = 2,
-                            Order = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ArticleId = 3,
-                            CoursePartId = 3,
-                            Order = 3
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.Link", b =>
@@ -290,29 +311,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("ArticleId");
 
                     b.ToTable("Links");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ArticleId = 1,
-                            LinkType = 2,
-                            Url = "https://docs.microsoft.com/en-us/dotnet/csharp/getting-started/"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ArticleId = 1,
-                            LinkType = 2,
-                            Url = "https://docs.microsoft.com/en-us/dotnet/csharp/basic-types"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ArticleId = 1,
-                            LinkType = 2,
-                            Url = "https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/classes"
-                        });
                 });
 
             modelBuilder.Entity("DataAccess.Model.Category", b =>

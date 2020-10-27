@@ -11,12 +11,12 @@ namespace EducationSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
         private readonly ICourseService _courseService;
 
-        public CategoriesController(ICategoryService categoryService, ICourseService courseService)
+        public CategoryController(ICategoryService categoryService, ICourseService courseService)
         {
             _categoryService = categoryService;
             _courseService = courseService;
@@ -33,6 +33,13 @@ namespace EducationSystem.Controllers
         public async Task<ActionResult<CategoryDetailDto>> GetAsync(int id)
         {
             var service = await _categoryService.GetAsync(id);
+            return service;
+        }
+
+        [HttpGet("GetWithChildren/{id}")]
+        public async Task<ActionResult<CategoryWithCategoryDto>> GetWithChildrenAsync(int id)
+        {
+            var service = await _categoryService.GetWithChildrenAsync(id);
             return service;
         }
     }

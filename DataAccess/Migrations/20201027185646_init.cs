@@ -129,24 +129,9 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Articles",
-                columns: new[] { "Id", "Text" },
-                values: new object[,]
-                {
-                    { 1, "C# syntax is highly expressive, yet it's also simple and easy to learn. The curly brace syntax of C# will be instantly recognizable to anyone familiar with C, C++, Java or JavaScript. Developers who know any of these languages are typically able to work productively in C# within a short time. C# provides powerful features such as nullable types, delegates, lambda expressions, pattern matching, and safe direct memory access. C# supports generic methods and types, which provide increased type safety and performance. C# provides iterators, which enable implementers of collection classes to define custom behaviors for client code. Language-Integrated Query (LINQ) expressions make the strongly typed query a first-class language construct." },
-                    { 2, "C# is a strongly typed language. Every variable and constant has a type, as does every expression that evaluates to a value. Every method signature specifies a type for each input parameter and for the return value. The .NET class library defines a set of built-in numeric types as well as more complex types that represent a wide variety of logical constructs, such as the file system, network connections, collections and arrays of objects, and dates. A typical C# program uses types from the class library as well as user-defined types that model the concepts that are specific to the program's problem domain." },
-                    { 3, "A type that is defined as a class is a reference type. hen the object is created, enough memory is allocated on the managed heap for that specific object, and the variable holds only a reference to the location of said object. Types on the managed heap require overhead both when they are allocated and when they are reclaimed by the automatic memory management functionality of the CLR, which is known as garbage collection. However, garbage collection is also highly optimized and in most scenarios, it does not create a performance issue." }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "Name", "ParentId" },
-                values: new object[,]
-                {
-                    { 1, "Computer", null },
-                    { 3, "DataBase", 3 },
-                    { 4, "Network", 4 }
-                });
+                values: new object[] { 1, "Computer", null });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -154,70 +139,83 @@ namespace DataAccess.Migrations
                 values: new object[] { 2, "Programming", 1 });
 
             migrationBuilder.InsertData(
-                table: "Links",
-                columns: new[] { "Id", "ArticleId", "LinkType", "Url" },
+                table: "Categories",
+                columns: new[] { "Id", "Name", "ParentId" },
+                values: new object[] { 3, "DataBase", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name", "ParentId" },
+                values: new object[] { 4, "Network", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name", "ParentId" },
                 values: new object[,]
                 {
-                    { 1, 1, 2, "https://docs.microsoft.com/en-us/dotnet/csharp/getting-started/" },
-                    { 2, 1, 2, "https://docs.microsoft.com/en-us/dotnet/csharp/basic-types" },
-                    { 3, 1, 2, "https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/classes" }
+                    { 5, "Concepts", 2 },
+                    { 6, "Web", 2 },
+                    { 7, "Application", 2 },
+                    { 15, "SQL Server", 3 },
+                    { 16, "Oracle", 3 }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "Id", "Name", "ParentId" },
-                values: new object[] { 5, "Concepts", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "Id", "Name", "ParentId" },
-                values: new object[] { 6, "Web", 2 });
-
-            migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "Id", "Name", "ParentId" },
-                values: new object[] { 7, "Application", 2 });
 
             migrationBuilder.InsertData(
                 table: "Courses",
                 columns: new[] { "Id", "CategoryId", "Description", "Name" },
                 values: new object[,]
                 {
-                    { 4, 6, null, "c++" },
-                    { 1, 7, null, "C#" },
-                    { 2, 7, null, "Android" },
-                    { 3, 7, null, "Flutter" }
+                    { 1, 2, null, "How to start" },
+                    { 2, 2, null, "essential information" },
+                    { 3, 2, null, "Steps" }
                 });
 
             migrationBuilder.InsertData(
-                table: "CourseParts",
-                columns: new[] { "Id", "CourseId", "Order", "Title" },
-                values: new object[] { 1, 1, 1, "Get Started" });
+                table: "Categories",
+                columns: new[] { "Id", "Name", "ParentId" },
+                values: new object[,]
+                {
+                    { 8, "Bootstrap", 6 },
+                    { 9, "Css", 6 },
+                    { 10, "Html", 6 },
+                    { 11, "C", 7 },
+                    { 12, "VB", 7 }
+                });
 
             migrationBuilder.InsertData(
-                table: "CourseParts",
-                columns: new[] { "Id", "CourseId", "Order", "Title" },
-                values: new object[] { 2, 1, 2, "Types" });
+                table: "Courses",
+                columns: new[] { "Id", "CategoryId", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 4, 5, null, "Object Orianting" },
+                    { 5, 6, null, "Languages" },
+                    { 6, 7, null, "Languages" }
+                });
 
             migrationBuilder.InsertData(
-                table: "CourseParts",
-                columns: new[] { "Id", "CourseId", "Order", "Title" },
-                values: new object[] { 3, 1, 0, "Classes" });
+                table: "Categories",
+                columns: new[] { "Id", "Name", "ParentId" },
+                values: new object[] { 13, "C#", 11 });
 
             migrationBuilder.InsertData(
-                table: "CoursePartArticles",
-                columns: new[] { "Id", "ArticleId", "CoursePartId", "Order" },
-                values: new object[] { 1, 1, 1, 1 });
+                table: "Categories",
+                columns: new[] { "Id", "Name", "ParentId" },
+                values: new object[] { 14, "C++", 11 });
 
             migrationBuilder.InsertData(
-                table: "CoursePartArticles",
-                columns: new[] { "Id", "ArticleId", "CoursePartId", "Order" },
-                values: new object[] { 2, 2, 2, 2 });
+                table: "Courses",
+                columns: new[] { "Id", "CategoryId", "Description", "Name" },
+                values: new object[] { 7, 11, null, "C Learning" });
 
             migrationBuilder.InsertData(
-                table: "CoursePartArticles",
-                columns: new[] { "Id", "ArticleId", "CoursePartId", "Order" },
-                values: new object[] { 3, 3, 3, 3 });
+                table: "Courses",
+                columns: new[] { "Id", "CategoryId", "Description", "Name" },
+                values: new object[] { 8, 13, null, "C# Learning" });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "Id", "CategoryId", "Description", "Name" },
+                values: new object[] { 9, 14, null, "C++ Learning" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_ParentId",

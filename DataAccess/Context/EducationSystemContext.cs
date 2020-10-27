@@ -4,6 +4,7 @@ using System.Text;
 using DataAccess.Model;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Context.ModelBuilders;
+using DataAccess.ViewDataModel;
 
 namespace DataAccess.Context
 {
@@ -21,12 +22,20 @@ namespace DataAccess.Context
         public virtual DbSet<Article> Articles { get; set; }
         public virtual DbSet<Link> Links { get; set; }
 
+        public virtual DbSet<CategoryViewDataModel> CategoryViewDataModels { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CategoryViewDataModel>(d =>
+            {
+                d.HasNoKey();
+                d.ToView("CategoryViewDataModel");
+            });
 
             modelBuilder.Entity<Category>(d =>
             {
                 d.HasKey(s => s.Id);
+               // d.ToTable("ddd");
                 d.Property(s => s.Name).HasMaxLength(32).IsRequired();
                 d.HasOne(s => s.Parent).WithMany(s => s.Children).HasForeignKey(s => s.ParentId).OnDelete(DeleteBehavior.NoAction);
                 d.HasMany(s => s.Courses).WithOne(s => s.Category).HasForeignKey(s => s.CategoryId);
@@ -70,10 +79,10 @@ namespace DataAccess.Context
 
             modelBuilder.CategorySeed();
             modelBuilder.CourseSeed();
-            modelBuilder.CoursePartSeed();
-            modelBuilder.CoursePartArticleSeed();
-            modelBuilder.ArticleSeed();
-            modelBuilder.LinkSeed();
+            // modelBuilder.CoursePartSeed();
+            // modelBuilder.CoursePartArticleSeed();
+            // modelBuilder.ArticleSeed();
+            // modelBuilder.LinkSeed();
 
             base.OnModelCreating(modelBuilder);
         }
