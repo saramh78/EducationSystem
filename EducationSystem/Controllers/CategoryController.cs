@@ -36,10 +36,10 @@ namespace EducationSystem.Controllers
             return service;
         }
 
-        [HttpGet("GetWithChildren/{id}")]
-        public async Task<ActionResult<CategoryWithCategoryDto>> GetWithChildrenAsync(int id)
+        [HttpGet("GetWithChildren/{id}/{level}")]
+        public async Task<ActionResult<List<CategoryWithCategoryDto>>> GetWithChildrenAsync(int id,int level)
         {
-            var service = await _categoryService.GetWithChildrenAsync(id);
+            var service = await _categoryService.GetWithChildrenAsync(id,level);
             return service;
         }
     }

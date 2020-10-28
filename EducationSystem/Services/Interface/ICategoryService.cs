@@ -10,6 +10,6 @@ namespace EducationSystem.Services.Interface
     {
         Task<List<CategoryDto>> GetAllAsync();
         Task<CategoryDetailDto> GetAsync(int categoryId);
-        Task<CategoryWithCategoryDto> GetWithChildrenAsync(int categoryId);
+        Task<List<CategoryWithCategoryDto>> GetWithChildrenAsync(int categoryId, int level);
     }
 }

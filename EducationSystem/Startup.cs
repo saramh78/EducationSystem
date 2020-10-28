@@ -33,9 +33,7 @@ namespace EducationSystem
         {
             services.AddControllers();
 
-           var connectionString = Configuration.GetConnectionString("EducationSystemConnectionStringSara");
-
-           services.AddDbContext<EducationSystemContext>(options => options.UseSqlServer(connectionString));
+           services.AddDbContext<EducationSystemContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
             //Repositories
             services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -52,6 +50,9 @@ namespace EducationSystem
             services.AddScoped<ICoursePartArticleService, CoursePartArticleService>();
             services.AddScoped<IArticleService, ArticleService>();
             services.AddScoped<ILinkService, LinkService>();
+
+            services.AddSwaggerGen();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +62,17 @@ namespace EducationSystem
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
+
 
             app.UseRouting();
 

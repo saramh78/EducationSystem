@@ -24,69 +24,57 @@ namespace DataAccess.Repositories.Class
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<List<CategoryViewDataModel>> FindWithChildrenAsync(int id)
+        public async Task<List<Category>> FindWithChildrenAsync(int id, int level)
         {
-            //var category = await _context.Set<Category>()
-            //    .Include(x => x.Children).FirstOrDefaultAsync(x => x.Id.Equals(id);
+            List<CategoryParsed> categories = new List<CategoryParsed>();
+            var find = _context.Categories.FirstOrDefault(x => x.Id.Equals(id));
+            categories.Add(new CategoryParsed { Categ=find, level=0, Parsed=false});
 
+            while(categories.Any(x=>!x.Parsed))
+            {
+                var r = categories.FirstOrDefault(x => !x.Parsed);
+                if(level !=-1 && r.level>=level)
+                {
 
+                }
+                else
+                {
+                    var child=_context.Categories.Where(x=>x.ParentId==x.)
+                }
+            }
+            CategoryParsed c = new CategoryParsed
+            {
+                Category = a,
+                level = 0,
+                Parsed = false
+            };
+            
 
-            var students = await _context.Set<CategoryViewDataModel>().FromSqlRaw("GetCategories1 {0},{1}", id,2).ToListAsync();
-            //var ff = students.GroupBy(x => x.ParentId);
-            return students;
+            while (cate)
+            {
+                if (level != -1 && c.level >= level)
+                { 
+                    c.Parsed = true;
+                    c.level++;
+                }
+                else
+                {                   
+                    categories.AddRange(await _context.Set<Category>().Where(s => s.ParentId == c.Category.Id).ToListAsync());
+                    i++;
+                    c.Category = categories[i];
+                    c.Parsed = true;
+                    if(categories[i].ParentId != categories[i-1].ParentId)
+                        c.level++;
+                }                
+            }
 
-        //var category = _context.Set<Category>().FromSqlRaw("");
-
-
-
-            //var category = await (from c1 in _context.Set<Category>()
-            //                join c2 in _context.Set<Category>() on c1.Id equals c2.ParentId
-            //                join co in _context.Set<Course>() on c1.Id equals co.CategoryId
-            //                where c1.Id.Equals(id) 
-            //                select c1).FirstOrDefaultAsync();
-            //return category;
-
-
-          
-           //List<Category> hierarchy = new List<Category>();
-            //Category category =await _context.Set<Category>().FirstOrDefaultAsync(x => x.Id.Equals(id));
-            //hierarchy.Add(category);
-            //hierarchy.AddRange(categories
-            //                .Where(c => c.ParentId == id)
-            //                .Select(c => new Category()
-            //                {
-            //                    Id = c.Id,
-            //                    Name=c.Name,
-            //                    ParentId = c.ParentId,
-            //                    Courses=c.Courses,
-            //                    Children = GetChildren( categories,c.Id)
-            //                })
-            //                .ToList());
-            //return hierarchy; List<Category> categories =await _context.Set<Category>().ToListAsync();
-
+            return categories;
         }
 
-    public static List<Category> GetChildren(List<Category> categories, int parentId)
-    {
-            return null;
-      //  return categories
-            //return categories.Where(x => x.ParentId == parentId || x.Id == parentId)
-            //   .Union(categories.Where(x => x.ParentId == parentId)
-            //               .SelectMany(y => GetChildren(y.Id)));
-
-        //List<Category> a=categories.Where(c => c.ParentId == parentId)
-        //        .Select(c => new Category
-        //        {
-        //            Id = c.Id,
-        //            Name = c.Name,
-        //            ParentId = c.ParentId,
-        //            Courses = c.Courses,
-        //            Children = GetChildren(categories, c.Id)
-        //        })
-        //        .ToList();
-        //return a;
-
+        public Task<List<CategoryViewDataModel>> FindWithChildrenAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
-}
 }
 

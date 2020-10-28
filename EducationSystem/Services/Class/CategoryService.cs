@@ -38,15 +38,14 @@ namespace EducationSystem.Services.Class
         }
 
 
-        public async Task<CategoryWithCategoryDto> GetWithChildrenAsync(int categoryId)
+        public async Task<List<CategoryWithCategoryDto>> GetWithChildrenAsync(int categoryId, int level)
         {
-            var categories = await _categoryRepository.FindWithChildrenAsync(categoryId);
+            var categories = await _categoryRepository.FindWithChildrenAsync(categoryId,level);
             if (categories == null)
             {
                 throw new Exception("category Not Found");
             }
-            // return categories.CategoryToCategoryWithCategoryDto();
-            return null;
+            return categories.CategoriesToCategoriesWithCategoryDto();
         }
     }
 }

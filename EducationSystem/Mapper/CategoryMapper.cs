@@ -57,7 +57,7 @@ namespace EducationSystem.Mapper
                 ParentId = category.ParentId,
                 Name = category.Name,
                 Courses = category.Courses != null ? category.Courses.Select(x => new CourseDto() { Id = x.Id, Name = x.Name }).ToList() : null,
-                Children = category.Children != null ? category.Children.Select(x => new CategoryWithCategoryDto { Id = x.Id, Name = x.Name }).ToList() : null,
+                Children = category.Children != null ? category.Children.Select(x => new CategoryWithCategoryDto { Id = x.Id, Name = x.Name,ParentId=x.ParentId }).ToList() : null,
             };
         }
 

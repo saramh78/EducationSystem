@@ -9,6 +9,6 @@ namespace DataAccess.Repositories.Interface
 {
     public interface ICategoryRepository:IBaseRepository<Category, int>
     {
-        Task<List<CategoryViewDataModel>> FindWithChildrenAsync(int id);
+        Task<List<Category>> FindWithChildrenAsync(int id, int level);
     }
 }
