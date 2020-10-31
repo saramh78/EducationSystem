@@ -26,55 +26,33 @@ namespace DataAccess.Repositories.Class
 
         public async Task<List<Category>> FindWithChildrenAsync(int id, int level)
         {
-            List<CategoryParsed> categories = new List<CategoryParsed>();
-            var find = _context.Categories.FirstOrDefault(x => x.Id.Equals(id));
-            categories.Add(new CategoryParsed { Categ=find, level=0, Parsed=false});
+            List<CategoryParsed> results = new List<CategoryParsed>();
+            var find =await _context.Categories.FirstOrDefaultAsync(x => x.Id.Equals(id));
 
-            while(categories.Any(x=>!x.Parsed))
+            if(find == null)
             {
-                var r = categories.FirstOrDefault(x => !x.Parsed);
+                return null;
+            }
+
+            results.Add(new CategoryParsed { Categ=find, level=0, Parsed=false});
+
+            while(results.Any(x=>!x.Parsed))
+            {
+                var r = results.FirstOrDefault(x => !x.Parsed);
                 if(level !=-1 && r.level>=level)
                 {
-
+                    
                 }
                 else
                 {
-                    var child=_context.Categories.Where(x=>x.ParentId==x.)
+                    var child = _context.Categories.Where(x => x.ParentId == r.Categ.Id)
+                        .Select(x => new CategoryParsed() { Categ = x, Parsed = false, level = r.level + 1 });
+                    results.AddRange(child);
                 }
+                r.Parsed = true;
             }
-            CategoryParsed c = new CategoryParsed
-            {
-                Category = a,
-                level = 0,
-                Parsed = false
-            };
-            
-
-            while (cate)
-            {
-                if (level != -1 && c.level >= level)
-                { 
-                    c.Parsed = true;
-                    c.level++;
-                }
-                else
-                {                   
-                    categories.AddRange(await _context.Set<Category>().Where(s => s.ParentId == c.Category.Id).ToListAsync());
-                    i++;
-                    c.Category = categories[i];
-                    c.Parsed = true;
-                    if(categories[i].ParentId != categories[i-1].ParentId)
-                        c.level++;
-                }                
-            }
-
-            return categories;
-        }
-
-        public Task<List<CategoryViewDataModel>> FindWithChildrenAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+            return results.Select(x => x.Categ).ToList();
+        } 
     }
 }
 
