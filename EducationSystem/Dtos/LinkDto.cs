@@ -8,8 +8,6 @@ namespace EducationSystem.Dtos
 {
     public class LinkDto
     {
-        public int Id { get; set; }
-        public int ArticleId { get; set; }
         public string Url { get; set; }
         public LinkType LinkType { get; set; }
     }

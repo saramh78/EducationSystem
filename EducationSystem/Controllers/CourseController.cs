@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EducationSystem.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,9 +23,9 @@ namespace EducationSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CourseDetailDto>> AddCourseWithRelations(CourseWithRelaitionsDto courseWithRelaitionsDto)
+        public async Task<ActionResult<CourseDetailDto>> AddCourseWithRelations(CourseDetailDto courseDetailDto)
         {
-            var service = await _courseService.AddCourseWithRelations(courseWithRelaitionsDto);
+            var service = await _courseService.AddCourseWithRelations(courseDetailDto);
             return service;
         }
     }

@@ -8,10 +8,8 @@ namespace EducationSystem.Dtos
 {
     public class CoursePartDto
     {
-        public int Id { get; set; }
-        public int CourseId { get; set; }
         public string Title { get; set; }
         public int Order { get; set; }
-        public List<CoursePartArticlesDto> CoursePartArticles { get; set; }
+        public List<ArticleInsertApiModel> Articles { get; set; }
     }
 }
