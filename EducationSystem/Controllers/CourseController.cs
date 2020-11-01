@@ -12,7 +12,20 @@ namespace EducationSystem.Controllers
     [ApiController]
     public class CourseController : ControllerBase
     {
-        
+        private readonly ICategoryService _categoryService;
+        private readonly ICourseService _courseService;
 
+        public CourseController(ICategoryService categoryService, ICourseService courseService)
+        {
+            _categoryService = categoryService;
+            _courseService = courseService;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<CourseDetailDto>> AddCourseWithRelations(CourseWithRelaitionsDto courseWithRelaitionsDto)
+        {
+            var service = await _courseService.AddCourseWithRelations(courseWithRelaitionsDto);
+            return service;
+        }
     }
 }
