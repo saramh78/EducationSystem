@@ -1,11 +1,12 @@
 ﻿using DataAccess.Context.ModelBuilders;
 using DataAccess.Model;
 using DataAccess.ViewDataModel;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Context
 {
-    public class EducationSystemContext : DbContext
+    public class EducationSystemContext : IdentityDbContext
     {
         public EducationSystemContext(DbContextOptions options) : base(options)
         {

@@ -1,12 +1,10 @@
-﻿using EducationSystem.Dtos;
+﻿using DataAccess.Repositories.Interface;
+using EducationSystem.Dtos;
+using EducationSystem.Mapper;
 using EducationSystem.Services.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using DataAccess.Repositories.Class;
-using DataAccess.Repositories.Interface;
-using EducationSystem.Mapper;
 
 namespace EducationSystem.Services.Class
 {

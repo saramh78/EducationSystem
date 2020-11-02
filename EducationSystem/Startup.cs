@@ -16,6 +16,7 @@ using DataAccess.Repositories.Class;
 using DataAccess.Repositories.Interface;
 using EducationSystem.Services.Interface;
 using EducationSystem.Services.Class;
+using Microsoft.AspNetCore.Identity;
 
 namespace EducationSystem
 {
@@ -31,9 +32,15 @@ namespace EducationSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddDbContext<EducationSystemContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<EducationSystemContext>();
+          //  services.AddIdentityServer().AddApiAuthorization<IdentityUser, EducationSystemContext>();
+            
             services.AddControllers();
 
-           services.AddDbContext<EducationSystemContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            
+           
 
             //Repositories
             services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -77,6 +84,9 @@ namespace EducationSystem
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
+            app.UseIdentityServer();
 
             app.UseEndpoints(endpoints =>
             {

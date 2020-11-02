@@ -1,11 +1,8 @@
 ﻿using EducationSystem.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using EducationSystem.Services.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EducationSystem.Controllers
 {
@@ -13,12 +10,10 @@ namespace EducationSystem.Controllers
     [ApiController]
     public class CourseController : ControllerBase
     {
-        private readonly ICategoryService _categoryService;
         private readonly ICourseService _courseService;
 
-        public CourseController(ICategoryService categoryService, ICourseService courseService)
+        public CourseController( ICourseService courseService)
         {
-            _categoryService = categoryService;
             _courseService = courseService;
         }
 
@@ -26,6 +21,20 @@ namespace EducationSystem.Controllers
         public async Task<ActionResult<CourseDetailDto>> AddCourseWithRelations(CourseDetailDto courseDetailDto)
         {
             var service = await _courseService.AddCourseWithRelations(courseDetailDto);
+            return service;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<CourseDto>>> GetAllAsync()
+        {
+            var service = await _courseService.GetAllAsync();
+            return service;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CourseDetailDto>> GetAsync(int id)
+        {
+            var service = await _courseService.GetAsync(id);
             return service;
         }
     }

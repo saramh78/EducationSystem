@@ -1,11 +1,7 @@
 ﻿using DataAccess.Model;
 using EducationSystem.Dtos;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 
 namespace EducationSystem.Mapper
 {
@@ -20,8 +16,7 @@ namespace EducationSystem.Mapper
                     Article = new Article()
                     {
                         Text = x.Text,
-                        Links = x.Links.Select(l => new Link { LinkType = l.LinkType, Url = l.Url})
-                            .ToList()
+                        Links= x.ReferenceLinks.LinkDtosToLinks(x.MediaLinks)
                     }
                 }).ToList();
             return result;
@@ -33,7 +28,8 @@ namespace EducationSystem.Mapper
             {
                 Order = x.Order,
                 Text = x.Article.Text,
-                Links = x.Article.Links.LinksToLinkDtos(),
+                ReferenceLinks=x.Article.Links.ToList().LinksToReferenceLinks(),
+                MediaLinks= x.Article.Links.ToList().LinksToMediaLinks()
             }).ToList();
         }
     }

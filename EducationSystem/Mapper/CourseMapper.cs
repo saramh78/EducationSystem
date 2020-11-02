@@ -1,15 +1,13 @@
 ﻿using DataAccess.Model;
 using EducationSystem.Dtos;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EducationSystem.Mapper
 {
     public static class CourseMapper
     {
-        public static Course CourseDtoToCourse(this CourseDetailDto courseDetailDto)
+        public static Course CourseDetailDtoToCourse(this CourseDetailDto courseDetailDto)
         {
             var course = new Course()
             {
@@ -24,11 +22,9 @@ namespace EducationSystem.Mapper
                 }).ToList()
             };
             return course;
-
         }
 
-
-        public static CourseDetailDto CourseToCourseDto(this Course course)
+        public static CourseDetailDto CourseToCourseDetailDto(this Course course)
         {
             var courseDto = new CourseDetailDto()
             {
@@ -40,6 +36,11 @@ namespace EducationSystem.Mapper
             return courseDto;
         }
 
-        
+        public static List<CourseDto> CoursesToCourseDtos(this List<Course> courses)
+        {
+            var courseDtos = courses.Select(x => new CourseDto { Id = x.Id, CategoryId = x.CategoryId, Name = x.Name, Descrption = x.Description }).ToList();
+            return courseDtos;
+        }
+
     }
 }

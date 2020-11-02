@@ -3,8 +3,6 @@ using EducationSystem.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace EducationSystem.Mapper
 {
@@ -17,7 +15,6 @@ namespace EducationSystem.Mapper
                 Id = category.Id,
                 ParentId = category.ParentId,
                 Name = category.Name,
-                            
             };
         }
 
@@ -29,8 +26,6 @@ namespace EducationSystem.Mapper
                 ParentId = category.ParentId,
                 Name = category.Name,
                 CourseDtos = category.Courses != null ? category.Courses.Select(x => new CourseDto() {Id=x.Id, Name=x.Name }).ToList() : null,
-               
-
             };
         }
 

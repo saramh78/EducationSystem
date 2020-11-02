@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace EducationSystem.Dtos
 {
@@ -9,7 +6,7 @@ namespace EducationSystem.Dtos
     {
         public string Text { get; set; }
         public int Order { get; set; }
-        // public List<CoursePartArticlesDto> CoursePartArticles { get; set; }
-        public List<LinkDto> Links { get; set; }
+        public List<string> ReferenceLinks { get; set; }
+        public List<string> MediaLinks { get; set; }
     }
 }
